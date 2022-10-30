@@ -6,25 +6,24 @@ pipeline {
     }
 
     stages {
+
         stage('Clone') {
             steps {
                 git credentialsId: 'git_credentials', url: 'https://github.com/yogeshk04/projects.git'
             }
         }
-        stage('Compile') {
+
+        stage('Build') {
             steps {
                 withMaven(maven : 'maven_3_6_3')
                 sh 'mvn clean install'
             }
         }
-        stage('build') {
-            steps {
-                sh 'mvn clean install'
-            }
-        }
+
         stage('Test') {
             steps {
-                echo 'Test Application'
+                withMaven(maven : 'maven_3_6_3')
+                sh 'mvn test'
             }
         }
     
