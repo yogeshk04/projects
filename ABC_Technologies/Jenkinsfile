@@ -2,9 +2,14 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('git-clone') {
             steps {
-                echo 'Build Application'
+                git credentialsId: 'git_credentials', 'https://github.com/yogeshk04/projects.git'
+            }
+        }
+        stage('build') {
+            steps {
+                mvn clean install
             }
         }
         stage('Test') {
