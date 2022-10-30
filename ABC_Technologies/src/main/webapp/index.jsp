@@ -14,13 +14,6 @@ function viewProduct(){
 alert("You will be navigated to view module");  
 }
 </script>
-</script>  
-<button name="Edit Product" value="Edit Product" type="button" onclick="viewProduct()">Edit Product</button>  
-<script>  
-function editProduct(){  
-alert("You will be navigated to edit module");  
-}
-</script>
 </body>
 </html>
 
