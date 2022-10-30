@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Build Application'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Test Application'
+            }
+        }
+    
+        stage('Deploy') {
+            steps {
+                echo 'Deploy Application'
+            }
+        }
+    }
+    
+    post
+    {
+        always
+        {
+            emailext body: 'Pipeline summary', subject: 'ABC_Tech Pipleline status', to: 'yogeshk04@gmail.com'
+        }
+    }
+}
