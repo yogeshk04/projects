@@ -30,12 +30,4 @@ pipeline {
             }
         }
     }
-    
-    post
-    {
-        always
-        {
-            emailext body: 'Pipeline summary', subject: 'ABC_Tech Pipleline status', to: 'yoarsde@gmail.com'
-        }
-    }
 }
