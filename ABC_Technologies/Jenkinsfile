@@ -18,7 +18,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''cd ABC_Technologies/
-                    sh 'mvn clean verify -DskipITs=true';junit '**/target/surefire-reports/TEST-*.xml'archive 'target/*.jar'
+                    sh 'mvn clean verify -DskipITs=true';junit '**/target/surefire-reports/TEST-*.xml'archive 'target/*.war'
                 '''
             }
         }
