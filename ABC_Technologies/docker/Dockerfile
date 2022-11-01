@@ -1,9 +1,8 @@
 FROM tomcat:9.0-alpine
 
-ADD *.war /opt/tomcat/webapps/
+LABEL maintainer="yoarsde@gmail.com"
+ADD ./targer/*.war /usr/local/tomcat/webapps/
 
-EXPOSE 8082
+EXPOSE 8080
 
 CMD ["catalina.sh", "run"]
-
-
