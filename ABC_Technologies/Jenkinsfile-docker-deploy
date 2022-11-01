@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     stages {
-        stage('s1') {
-            steps{'git clone'}
+        stage('clone') {
+            steps{}
         }
-        stage('s2') {
-            steps{'build'}
+        stage('build') {
+            steps{}
         }
-        stage('s3') {
-            steps{'deploy'}
+        stage('deploy') {
+            steps{}
         }
     }
 }
