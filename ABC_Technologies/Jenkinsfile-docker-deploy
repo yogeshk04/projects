@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('s1') {
+            steps{'git clone'}
+        }
+        stage('s2') {
+            steps{'build'}
+        }
+        stage('s3') {
+            steps{'deploy'}
+        }
+    }
+}

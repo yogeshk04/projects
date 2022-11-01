@@ -15,21 +15,20 @@ pipeline {
 
         stage('Build') {
             steps {
-                withMaven(maven : 'maven_3_6_3')
                 sh 'mvn clean install'
             }
         }
 
         stage('Test') {
             steps {
-                withMaven(maven : 'maven_3_6_3')
                 sh 'mvn test'
             }
         }
     
         stage('Deploy') {
             steps {
-                echo 'Deploy Application'
+                withMaven(maven : 'maven_3_6_3')
+                sh 'mvn deploy'
             }
         }
     }
@@ -38,7 +37,7 @@ pipeline {
     {
         always
         {
-            emailext body: 'Pipeline summary', subject: 'ABC_Tech Pipleline status', to: 'yogeshk04@gmail.com'
+            emailext body: 'Pipeline summary', subject: 'ABC_Tech Pipleline status', to: 'yoarsde@gmail.com'
         }
     }
 }
