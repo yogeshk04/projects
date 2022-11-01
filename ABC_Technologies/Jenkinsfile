@@ -1,34 +1,18 @@
 pipeline {
     agent any
 
-    environment {
-        PATH = '/opt/maven:$PATH'
-    }
-
     stages {
-
-        stage('Clone') {
+        stage('Git checkout') {
             steps {
-                git credentialsId: 'git_credentials', url: 'https://github.com/yogeshk04/projects.git'
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '9665c479-d29b-43b7-b413-58795572bf03', url: 'https://github.com/yogeshk04/projects.git']]])
             }
         }
-
-        stage('Build') {
+        stage('Maven Build') {
             steps {
-                sh 'mvn clean install'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-    
-        stage('Deploy') {
-            steps {
-                withMaven(maven : 'maven_3_6_3')
-                sh 'mvn deploy'
+                sh '''cd ABC_Technologies/
+                    mvn clean package
+                    mv target/*.war target/ABCtechnologies-1.0
+                '''
             }
         }
     }
