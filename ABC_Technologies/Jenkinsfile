@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Git checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '9665c479-d29b-43b7-b413-58795572bf03', url: 'https://github.com/yogeshk04/projects.git']]])
+                git credentialsId: 'git_credentials', url: 'https://github.com/yogeshk04/projects.git'
             }
         }
         stage('Build') {
@@ -18,7 +18,14 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''cd ABC_Technologies/
-                    sh 'mvn clean verify -DskipITs=true';junit '**/target/surefire-reports/TEST-*.xml'archive 'target/*.war'
+                    mvn test
+                '''
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh ''' cd ABC_Technologies/
+                    sudo cp target/*.war /opt/tomcat/webapps/
                 '''
             }
         }
