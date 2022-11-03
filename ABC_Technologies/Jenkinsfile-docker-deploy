@@ -12,18 +12,24 @@ pipeline {
     }
     stage('Package') {
       steps {
-        sh 'mvn package'
+        sh '''cd ABC_Technologies/
+            mvn clean package
+            mv target/*.war target/abctech.war
+        '''
       }
     }
     stage('Docker Build and Tag') {
       steps {
-        sh 'docker build -t abctechapp:latest .'
-        sh 'docker tag abctechapp yogeshk04/abctechapp:latest'
+        sh '''cd ABC_Technologies/
+            docker build -t abctechapp:latest .
+            docker tag abctechapp yogeshk04/abctechapp:latest
+        '''
       }
     }
     stage('DockerHub Login') {
       steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin .'
+        sh '''echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin .
+        '''
       }
     }
     stage('Publish image to Docker Hub') {
@@ -37,11 +43,5 @@ pipeline {
         sh "docker run -d -p 8003:8080 yogeshk04/abctechapp"
       }
     }
-
-    post {
-        always {
-            sh 'docker logout'
-        }
-    }    
   }
 }
