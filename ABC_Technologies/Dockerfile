@@ -1,7 +1,7 @@
 FROM tomcat:9.0-alpine
 
 LABEL maintainer="yoarsde@gmail.com"
-ADD ./ABC_Technologies/targer/*.war /usr/local/tomcat/webapps/
+ADD targer/*.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 
