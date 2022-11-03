@@ -21,8 +21,8 @@ pipeline {
     stage('Docker Build and Tag') {
       steps {
         sh '''cd ABC_Technologies/
-            docker build -t abctechapp:latest .
-            docker tag abctechapp yogeshk04/abctechapp:latest
+            sudo docker build -t abctechapp:latest .
+            sudo docker tag abctechapp yogeshk04/abctechapp:latest
         '''
       }
     }
