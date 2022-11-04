@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+    agent any
 
   environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub-token')
@@ -28,8 +28,7 @@ pipeline {
     }
     stage('DockerHub Login') {
       steps {
-        sh '''sudo echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin .
-        '''
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
     stage('Publish image to Docker Hub') {
