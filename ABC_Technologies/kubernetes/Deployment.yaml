@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: abctech
+spec:
+  replica: 2
+  selector: 
+    matchLabels:
+      app: abctech
+  template:
+    metadata:
+      labels:
+        app: abctech
+    spec:
+      containers:
+      - name: abctech
+        image: yogeshk04/abctechapp:latest
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
