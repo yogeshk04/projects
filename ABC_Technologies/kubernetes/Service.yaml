@@ -6,7 +6,6 @@ spec:
   selector:
     app: abctech
   ports:
-  - port: 8003
+  - port: 8085
     targetPort: 8080
-    nodePort: 31884
-  type: LoadBalancer
+  type: NodePort

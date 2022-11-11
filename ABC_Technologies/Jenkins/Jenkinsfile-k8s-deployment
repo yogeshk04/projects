@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+  environment {
+        DOCKERHUB_CREDENTIALS=credentials('dockerhub-token')
+    }
+  stages {
+    stage('Git checkout') {
+      steps {
+        git credentialsId: 'git_credentials', url: 'https://github.com/yogeshk04/projects.git'
+      }
+    }
+    stage('Package') {
+      steps {
+        sh '''cd ABC_Technologies/
+            mvn clean package
+            mv target/*.war target/abctech.war
+        '''
+      }
+    }
+    stage('Docker Build and Tag') {
+      steps {
+        sh '''cd ABC_Technologies/
+            sudo docker build -t abctechapp:latest .
+            sudo docker tag abctechapp yogeshk04/abctechapp:latest
+        '''
+      }
+    }
+    stage('DockerHub Login') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+    }
+    stage('Publish image to Docker Hub') {
+      steps {        
+          sh 'sudo docker push yogeshk04/abctechapp:latest'        
+      }
+    }
+
+    stage('Run Docker container on Jenkins Agent') {
+      steps {
+        sh "docker run -d -p 8003:8080 yogeshk04/abctechapp"
+      }
+    }
+  }
+}
