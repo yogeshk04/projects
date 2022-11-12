@@ -9,3 +9,4 @@ spec:
   - port: 8085
     targetPort: 8080
   type: NodePort
+  
