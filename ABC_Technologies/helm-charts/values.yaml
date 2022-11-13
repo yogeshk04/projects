@@ -1,0 +1,16 @@
+replicaCount: 2
+
+image:
+  repository: yogeshk04/abctechapp
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+service:
+  type: NodePort
+  port: 8082
+  name: abctech-service
+  targetPort: 8080
+
+container:
+  name: abctechapp
