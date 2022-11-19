@@ -1,0 +1,5 @@
+.idea
+*.log
+*.settings
+../.idea
+target/
