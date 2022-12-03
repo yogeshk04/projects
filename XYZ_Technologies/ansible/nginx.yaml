@@ -1,0 +1,21 @@
+---
+- name: Setup nginx server
+  hosts: web
+  remote_user: edureka
+  become: true
+
+  tasks:
+  - name: Basically "apt-get update"
+    apt:
+      update_cache: yes
+
+  - name: Install nginx package
+    apt:
+      name: nginx
+      state: latest
+
+  - name: Start server
+    service:
+      name: nginx
+      state: restarted
+      enable: true
