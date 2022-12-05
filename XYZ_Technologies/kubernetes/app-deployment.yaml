@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xyztech-deployment
+  labels:
+    app: xyztech
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: xyztech
+  template:
+    metadata:
+      labels:
+        app: xyztech
+    spec:
+      containers:
+      - name: xyztech
+        image: yogeshk04/xyztech:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080

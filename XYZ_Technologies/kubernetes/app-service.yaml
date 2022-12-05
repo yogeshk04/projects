@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: xyztech-service  
+  labels:
+    app: xyztech
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 8082
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: xyztech
+  sessionAffinity: None
